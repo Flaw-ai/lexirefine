@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "lemma": "zone",
+        "inflections": {
+            "third_person_singular": "zones",
+            "past_tense": "zoned",
+            "past_participle": "zoned",
+            "present_participle": "zoning"
+        },
+        "senses": [
+            {
+                "sense_id": "zone_1",
+                "definition": "To divide an area into zones",
+                "examples": [
+                    "The land was zoned for housing."
+                ]
+            }
+        ],
+        "sources": [
+            {
+                "source_name": "DeepSeek",
+                "source_url": "https://chat.deepseek.com"
+            }
+        ],
+        "part_of_speech": "verb",
+        "generation_method": "ai",
+        "verification_status": "pending"
+    },
+    {
+        "id": 2,
+        "lemma": "zone",
+        "inflections": {
+            "third_person_singular": "zooms",
+            "past_tense": "zoomed",
+            "past_participle": "zoomed",
+            "present_participle": "zooming"
+        },
+        "senses": [
+            {
+                "sense_id": "zone_1",
+                "definition": "To move very fast",
+                "examples": [
+                    "The bike zoomed past."
+                ]
+            },
+            {
+                "sense_id": "zone_2",
+                "definition": "To adjust a camera lens",
+                "examples": [
+                    "He zoomed in on the bird."
+                ]
+            }
+        ],
+        "sources": [
+            {
+                "source_name": "DeepSeek",
+                "source_url": "https://chat.deepseek.com"
+            }
+        ],
+        "part_of_speech": "verb",
+        "generation_method": "ai",
+        "verification_status": "pending"
+    }
+]

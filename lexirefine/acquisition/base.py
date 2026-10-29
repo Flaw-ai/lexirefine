@@ -26,10 +26,13 @@ class GenerationMethod(Enum):
     
 @dataclasses.dataclass(frozen=True, slots=True, kw_only=True)
 class SenseRecord:
+    sense_id: str
     definition: str
     examples: Tuple[str, ...] = dataclasses.field(default_factory=tuple)
     
     def __post_init__(self):
+        if not isinstance(self.sense_id, str) or not self.sense_id.strip():
+            raise ValueError("sense_id error: sense_id must be a non-empty string.")
         if not isinstance(self.definition, str) or not self.definition.strip():
             raise ValueError("definition error: definition must be a non-empty string.")
         if not isinstance(self.examples, tuple):
@@ -50,8 +53,9 @@ class SourceRecord:
 
 @dataclasses.dataclass(frozen=True, slots=True, kw_only=True)
 class RawSourceRecord:
+    id: int
     lemma: str
-    part_of_speech: str
+    part_of_speech: PartOfSpeech
     inflections: Dict[str, Union[str, Tuple[str, ...]]]
     senses: Tuple[SenseRecord, ...]
     sources: Tuple[SourceRecord, ...]
@@ -73,7 +77,7 @@ class RawSourceRecord:
         sanitized_inflections = {}
         for k, v in self.inflections.items():
             if isinstance(v, str):
-                v = tuple(v)
+                v = (v,)
             if not isinstance(v, (str, tuple)) or (isinstance(v, tuple) and not all(isinstance(i, str) for i in v)):
                 raise ValueError(f"inflections error: key '{k}' must map to a string or a tuple of strings.")
             sanitized_inflections[k] = v
@@ -88,7 +92,7 @@ class BaseConnector(ABC):
     def validate_configuration(self, configuration: Dict[str, Any]) -> None:
         if not isinstance(configuration, dict):
             raise ValueError("Configuration must be a dictionary.")
-        if "api_key" in configuration or not isinstance(configuration["api_key"], str):
+        if "api_key" not in configuration or not isinstance(configuration["api_key"], str):
             raise ValueError("Configuration must contain a valid 'api_key' of type string.")
     
     @abstractmethod
